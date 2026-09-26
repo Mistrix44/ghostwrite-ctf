@@ -1,0 +1,15 @@
+# secrets / generated at runtime
+*.key
+*.pem
+secrets/
+.env
+
+# CTFd runtime data
+ctfd/CTFd/logs/
+ctfd/.data/
+
+# OS/editor junk
+.DS_Store
+*.swp
+__pycache__/
+*.pyc
