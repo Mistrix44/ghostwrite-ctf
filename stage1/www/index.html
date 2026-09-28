@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Nightfall Interactive</title>
-<style>
-  body { background:#0a0e0f; color:#d8f5f2; font-family: 'Courier New', monospace; margin:0; padding:0; }
-  header { padding:40px; border-bottom:1px solid #222; }
-  h1 { color:#00fff2; letter-spacing:2px; }
-  nav a { color:#00fff2; margin-right:20px; text-decoration:none; }
-  section { padding:40px; max-width:700px; }
-  footer { padding:20px 40px; font-size:0.8em; color:#667; border-top:1px solid #222; }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nightfall Interactive | Project Eclipse</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>NIGHTFALL INTERACTIVE</h1>
+<header class="top">
+  <a class="brand" href="index.html"><i></i>Nightfall Interactive</a>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="team.html">Team</a>
+    <a class="on" href="index.html">Project Eclipse</a>
+    <a href="index.html#devlog">Devlog</a>
+    <a href="team.html">Team</a><a href="careers.html">Careers</a>
   </nav>
 </header>
-<section>
-  <h2>Building the future of narrative games.</h2>
-  <p>Nightfall Interactive is an independent studio currently in production on <strong>Project Eclipse</strong>, our most ambitious title yet. We're a small, focused team obsessed with atmosphere, sound design, and stories that stick with you.</p>
-  <p>Founded by veteran developers, we ship lean and iterate fast — our whole pipeline is built in-house.</p>
+<section class="hero">
+  <div class="eclipse" aria-hidden="true"></div>
+  <div class="copy">
+    <h1>Project Eclipse</h1>
+    <p class="lead">A narrative adventure about a town that loses the sun for one day, and what people do when they think no one is watching.</p>
+    <div class="btns">
+      <a class="btn main" href="#devlog">Read the devlog</a>
+      <a class="btn" href="team.html">Meet the team</a>
+    </div>
+  </div>
+</section>
+<section class="wrap" id="devlog">
+  <h2>Devlog</h2>
+  <p class="sub">Project Eclipse is in production and aiming for 2027. Here is what the team has been building.</p>
+  <div class="log">
+    <article class="entry"><time>25 Sep 2026</time><div><h3>Chapter 4 cutscenes are wired in</h3><p>Trigger volumes now start each cutscene from the player's position, so the camera never jumps. Alex and Priya are polishing the transitions this week.</p></div></article>
+    <article class="entry"><time>16 Sep 2026</time><div><h3>Rebuilding the save system</h3><p>Save states were leaking memory during long sessions. The new serializer is smaller, faster, and finally survives a four hour playthrough.</p></div></article>
+    <article class="entry"><time>9 Sep 2026</time><div><h3>Sound of a town without sunlight</h3><p>Jonas recorded three nights of field audio for the eclipse sequence. Crickets, distant traffic, and one very confused rooster.</p></div></article>
+    <article class="entry"><time>2 Sep 2026</time><div><h3>Why we build everything ourselves</h3><p>Every Project Eclipse build ships through Nightfall Forge, our own source and build platform. It keeps the pipeline small, fast and entirely ours.</p></div></article>
+  </div>
 </section>
 <footer>
-  &copy; Nightfall Interactive. Engineering tools and internal services are hosted under our own domain family (*.nightfall-interactive.local) for security and control.
+  <span>&copy; 2026 Nightfall Interactive</span>
+  <span>Studio tools and internal services live under our own domain family, *.nightfall-interactive.local</span>
 </footer>
 </body>
 </html>

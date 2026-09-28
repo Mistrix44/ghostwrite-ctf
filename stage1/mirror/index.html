@@ -1,18 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Internal Staging Mirror</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mirror-07</title>
 <style>
-  body { background:#0a0e0f; color:#d8f5f2; font-family: 'Courier New', monospace; margin:0; padding:40px; }
-  h1 { color:#ff003c; }
-  .flag { background:#10161a; border:1px solid #00fff2; padding:16px; border-radius:6px; display:inline-block; margin-top:20px; }
+:root{--cy:#00fff2;--rd:#ff003c;--tx:#c9d6d8;--mu:#5d7275}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#020405;color:var(--tx);font:15px/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;background:repeating-linear-gradient(0deg,rgba(0,255,242,.045) 0 1px,transparent 1px 3px)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:8;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.85))}
+main{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:64px 24px 80px}
+pre.ghost{color:var(--cy);font-size:15px;line-height:1.15;text-shadow:0 0 10px rgba(0,255,242,.5);margin-bottom:28px}
+.glitch{position:relative;font:700 clamp(2.6rem,11vw,6.5rem)/1 ui-monospace,Menlo,Consolas,monospace;color:#fff;letter-spacing:.03em}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;overflow:hidden}
+.glitch::before{color:var(--cy);transform:translate(-3px,0);clip-path:inset(0 0 60% 0)}
+.glitch::after{color:var(--rd);transform:translate(3px,0);clip-path:inset(60% 0 0 0)}
+.tag{color:var(--rd);margin:18px 0 32px;font-size:14px}
+.msg{max-width:40em;color:var(--tx);margin-bottom:36px}
+.msg b{color:#fff;font-weight:600}
+.term{border:1px solid rgba(0,255,242,.35);background:rgba(0,12,14,.7);border-radius:4px;margin-bottom:32px}
+.term .bar{padding:8px 14px;border-bottom:1px solid rgba(0,255,242,.25);color:var(--mu);font-size:12px;display:flex;justify-content:space-between}
+.term .bar i{color:var(--rd);font-style:normal}
+.term .body{padding:16px 18px;font-size:13px}
+.term p{color:var(--tx)}
+.term em{color:var(--mu);font-style:normal}
+.term .ok{color:var(--cy)}
+.term .hot{color:var(--rd)}
+.flag{border:1px solid var(--cy);background:rgba(0,255,242,.06);padding:16px 20px;border-radius:4px;box-shadow:0 0 22px rgba(0,255,242,.18)}
+.flag small{display:block;color:var(--mu);margin-bottom:6px;font-size:12px}
+.flag code{color:var(--cy);font:600 clamp(.9rem,3.2vw,1.15rem)/1.4 ui-monospace,Menlo,Consolas,monospace;word-break:break-all;user-select:all}
+footer{margin-top:44px;color:var(--mu);font-size:12px}
+@media(prefers-reduced-motion:no-preference){
+.glitch::before{animation:g1 3.2s infinite steps(1)}
+.glitch::after{animation:g2 3.2s infinite steps(1)}
+.term p{animation:on .4s backwards}
+.term p:nth-child(1){animation-delay:.3s}.term p:nth-child(2){animation-delay:.9s}.term p:nth-child(3){animation-delay:1.5s}.term p:nth-child(4){animation-delay:2.1s}.term p:nth-child(5){animation-delay:2.7s}.term p:nth-child(6){animation-delay:3.3s}
+}
+@keyframes on{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+@keyframes g1{0%,88%,100%{clip-path:inset(0 0 60% 0);transform:translate(-3px,0)}90%{clip-path:inset(25% 0 45% 0);transform:translate(-8px,0)}94%{clip-path:inset(55% 0 10% 0);transform:translate(5px,0)}}
+@keyframes g2{0%,86%,100%{clip-path:inset(60% 0 0 0);transform:translate(3px,0)}89%{clip-path:inset(10% 0 70% 0);transform:translate(8px,0)}95%{clip-path:inset(40% 0 30% 0);transform:translate(-5px,0)}}
 </style>
 </head>
 <body>
-<h1>⚠ UNAUTHORIZED ACCESS DETECTED</h1>
-<p>This is an internal failover mirror for Nightfall Interactive infrastructure. Your access has been logged.</p>
-<p>— GHOSTWRITE</p>
-<div class="flag">GHOSTWRITE{f0rge_m1rr0r_l34k3d_7a3c91}</div>
+<main>
+<pre class="ghost" aria-hidden="true">     .-"""""-.
+   .'  _   _  '.
+  /   (o) (o)   \
+ |       ^       |
+ |     .---.     |
+ |    (_____)    |
+  \  /\/\/\/\/  /
+   '-'  '-'  '-'</pre>
+<h1 class="glitch" data-text="GHOSTWRITE">GHOSTWRITE</h1>
+<p class="tag">mirror-07 is online. it was never yours.</p>
+<p class="msg">Nightfall promoted this node to <b>production</b> without checking who was already inside. We were. Every commit, every build, every key your team trusted has been read, copied and rewritten. You followed the trail this far. That was the plan.</p>
+<div class="term">
+  <div class="bar"><span>session // mirror-07</span><i>recording</i></div>
+  <div class="body">
+    <p><em>[03:12:07]</em> <span class="ok">mirror-07 promoted by ops-bot</span></p>
+    <p><em>[03:12:09]</em> build agent session <span class="hot">hijacked</span></p>
+    <p><em>[03:14:41]</em> cloning project-eclipse ... 2.4 GB</p>
+    <p><em>[03:19:02]</em> lure page staged for a nightfall developer</p>
+    <p><em>[03:19:04]</em> <span class="ok">operator: ghostwrite</span></p>
+    <p><em>[03:19:05]</em> waiting for someone to click</p>
+  </div>
+</div>
+<div class="flag">
+  <small>proof of access</small>
+  <code>GHOSTWRITE{f0rge_m1rr0r_l34k3d_7a3c91}</code>
+</div>
+<footer>we write. you read.</footer>
+</main>
 </body>
 </html>
