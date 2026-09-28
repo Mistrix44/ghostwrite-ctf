@@ -1,0 +1,77 @@
+services:
+  # ===== TRACK A (ctfd_net) =====
+  ctfd_db:
+    image: mariadb:10.11
+    container_name: ghostwrite_ctfd_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ctfd_root_pw_change_me
+      MYSQL_DATABASE: ctfd
+      MYSQL_USER: ctfd
+      MYSQL_PASSWORD: ctfd_db_pw_change_me
+    volumes:
+      - ctfd_db_data:/var/lib/mysql
+    networks:
+      - ctfd_net
+
+  ctfd_cache:
+    image: redis:7-alpine
+    container_name: ghostwrite_ctfd_cache
+    restart: unless-stopped
+    networks:
+      - ctfd_net
+
+  ctfd:
+    image: ctfd/ctfd:latest
+    container_name: ghostwrite_ctfd
+    restart: unless-stopped
+    environment:
+      - UPLOAD_FOLDER=/var/uploads
+      - DATABASE_URL=mysql+pymysql://ctfd:ctfd_db_pw_change_me@ctfd_db/ctfd
+      - REDIS_URL=redis://ctfd_cache:6379
+      - SECRET_KEY=change_this_secret_key_later
+    volumes:
+      - ctfd_uploads:/var/uploads
+    depends_on:
+      - ctfd_db
+      - ctfd_cache
+    ports:
+      - "8000:8000"   # temporary direct access, will move behind proxy later
+    networks:
+      - ctfd_net
+
+    # proxy: (added in a later phase)
+
+  stage1:
+    image: nginx:alpine
+    container_name: ghostwrite_stage1
+    restart: unless-stopped
+    volumes:
+      - ./stage1/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./stage1/www:/usr/share/nginx/www:ro
+      - ./stage1/forge:/usr/share/nginx/forge:ro
+      - ./stage1/mirror:/usr/share/nginx/mirror:ro
+    ports:
+      - "80:80"
+    networks:
+      - ctfd_net
+
+  # stage2: (added in a later phase)
+  # stage3: (added in a later phase)
+
+  # ===== TRACK B (internal_net) — teammate fills these in =====
+  # jump: 
+  # stage4-5:
+  # c2:
+  # stage6: (uses static pcap file, no container needed)
+
+networks:
+  ctfd_net:
+    driver: bridge
+  internal_net:
+    driver: bridge
+    internal: true   # no route to real internet, matches report's isolation requirement
+
+volumes:
+  ctfd_db_data:
+  ctfd_uploads:
