@@ -47,3 +47,6 @@ footer{border-top:1px solid var(--line);padding:36px 6vw;color:var(--muted);font
 .role-row span{color:var(--muted)}
 .note{margin-top:40px;color:#b9b5cc;max-width:40em}
 @media(max-width:820px){.roster{grid-template-columns:1fr}}
+body{min-height:100vh;display:flex;flex-direction:column}
+.wrap{width:100%}
+footer{margin-top:auto}
