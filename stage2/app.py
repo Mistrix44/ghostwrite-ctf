@@ -4,6 +4,7 @@ app = Flask(__name__)
 
 CAMPAIGN_ID = "GW-ECLIPSE-07"
 FLAG = "GHOSTWRITE{n0t_4_r34l_c4ptch4_e51f28}"
+EVIDENCE_URL = "/files/evidence_GW-ECLIPSE-07.zip"
 
 PAGE = """<!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@ PAGE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Verify you are human</title>
 <style>
-:root{--ink:#1a1d21;--sub:#6b7280;--line:#e5e7eb;--accent:#2563eb;--bg:#f3f4f6}
+:root{--ink:#1a1d21;--sub:#6b7280;--line:#e5e7eb;--accent:#2563eb;--bg:#f3f4f6;--ok:#16a34a}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
 .card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.08);max-width:460px;width:100%;padding:40px 36px;text-align:center}
@@ -34,6 +35,13 @@ p.sub{color:var(--sub);font-size:.92rem;margin-bottom:28px}
 .cmdbox{background:#111827;color:#e5e7eb;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;padding:12px 14px;border-radius:6px;word-break:break-all;position:relative}
 .cmdbox .tag{position:absolute;top:-9px;left:12px;background:#7f1d1d;color:#fff;font:600 .65rem system-ui;padding:2px 8px;border-radius:4px}
 @keyframes sp{to{transform:rotate(360deg)}}
+.reveal{display:none;text-align:left;border:1px solid #bbf7d0;background:#f0fdf4;border-radius:8px;padding:18px 20px;margin-top:20px}
+.reveal.show{display:block}
+.reveal h2{font-size:.95rem;color:#166534;margin-bottom:12px}
+.reveal .row{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:#166534;margin-bottom:4px}
+.reveal code{display:block;background:#111827;color:#86efac;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;padding:10px 12px;border-radius:6px;margin:6px 0 14px;word-break:break-all;user-select:all}
+.dl{display:block;text-align:center;background:var(--ok);color:#fff;font-weight:600;font-size:.88rem;padding:11px 16px;border-radius:8px;text-decoration:none}
+.dl:hover{background:#15803d}
 </style>
 </head>
 <body>
@@ -54,6 +62,15 @@ p.sub{color:var(--sub);font-size:.92rem;margin-bottom:28px}
     <div class="cmdbox"><span class="tag">run this on a windows powershell</span>powershell -nop -w hidden -enc VwByAGkAdABlAC0ASABvAHMAdAAgACcAQgBPAE8ATQAuACAAWQBvAHUAcgAgAGQAZQB2AGkAYwBlACAAaABhAHMAIABiAGUAZQBuACAAYwBvAG0AcAByAG8AbQBpAHMAZQBkAC4AIABUAGgAaQBzACAAaQBzACAAdABoAGUAIABlAHgAYQBjAHQAIAB0AGUAYwBoAG4AaQBxAHUAZQAgAEcASABPAFMAVABXAFIASQBUAEUAIAB1AHMAZQBkACAAYQBnAGEAaQBuAHMAdAAgAEEAbABlAHgAIABNAGUAcgBjAGUAcgAuACcAIAAtAEYAbwByAGUAZwByAG8AdQBuAGQAQwBvAGwAbwByACAAUgBlAGQA</div>
   </div>
 
+  <div class="reveal" id="reveal">
+    <h2>Incident evidence recovered</h2>
+    <div class="row"><span>Campaign</span></div>
+    <code id="campaignCode"></code>
+    <div class="row"><span>Flag</span></div>
+    <code id="flagCode"></code>
+    <a class="dl" id="dlLink" href="#">Download evidence bundle</a>
+  </div>
+
   <div class="foot">Ray ID: 8f2a41c-ghostwrite &middot; Performance &amp; security by nightfall-verify</div>
 </div>
 <script>
@@ -68,7 +85,11 @@ function runCheck(){
   }, 1400);
 }
 function showReveal(data){
-  alert('campaign: ' + data.campaign_id + '  flag: ' + data.flag);
+  document.getElementById('err').classList.remove('show');
+  document.getElementById('campaignCode').textContent = data.campaign_id;
+  document.getElementById('flagCode').textContent = data.flag;
+  document.getElementById('dlLink').href = data.download_url;
+  document.getElementById('reveal').classList.add('show');
 }
 </script>
 </body>
@@ -80,7 +101,11 @@ def verify_page():
 
 @app.route("/verify/api/campaign-info")
 def campaign_info():
-    return jsonify({"campaign_id": CAMPAIGN_ID, "flag": FLAG})
+    return jsonify({
+        "campaign_id": CAMPAIGN_ID,
+        "flag": FLAG,
+        "download_url": EVIDENCE_URL
+    })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

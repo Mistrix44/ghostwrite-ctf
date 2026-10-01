@@ -63,6 +63,7 @@ services:  # ===== TRACK A (ctfd_net) =====
       - ./stage1/www:/usr/share/nginx/www:ro
       - ./stage1/forge:/usr/share/nginx/forge:ro
       - ./stage1/mirror:/usr/share/nginx/mirror:ro
+      - ./stage1/files:/usr/share/nginx/files:ro
     networks:
       - ctfd_net
 

@@ -13,3 +13,4 @@ ctfd/.data/
 *.swp
 __pycache__/
 *.pyc
+stage3work/
