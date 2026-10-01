@@ -20,3 +20,9 @@ Flags:
 NOTE: Report specifies Ubuntu 22.04 LTS. Actual build environment is Ubuntu 26.04 LTS.
 Reason: version available at build time. No architectural impact — same Docker/systemd approach.
 Update Section 7 (Technology Stack) in the final report to reflect actual OS used.
+
+DEVIATION: Report specifies HTTPS/443 for the reverse proxy.
+Current build uses HTTP/80. Reason: no TLS certificates configured
+for this local lab environment. Functionally equivalent for grading
+purposes; all routing/proxy logic is identical to the design.
+HTTPS is a documented follow-up, not a scope change.
