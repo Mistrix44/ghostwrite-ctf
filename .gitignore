@@ -14,3 +14,7 @@ ctfd/.data/
 __pycache__/
 *.pyc
 stage3work/
+
+# secrets - never commit real key material
+stage4-5/keys/player_key
+stage4-5/keys/agent_key.txt

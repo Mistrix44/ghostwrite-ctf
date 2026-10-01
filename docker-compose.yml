@@ -1,4 +1,5 @@
-services:  # ===== TRACK A (ctfd_net) =====
+services:
+  # ===== TRACK A (ctfd_net) =====
   ctfd_db:
     image: mariadb:10.11
     container_name: ghostwrite_ctfd_db
@@ -66,19 +67,35 @@ services:  # ===== TRACK A (ctfd_net) =====
       - ./stage1/files:/usr/share/nginx/files:ro
     networks:
       - ctfd_net
+  # stage3: (uses static files served via stage1's /files/ path, no separate container needed)
 
   stage2:
-   build: ./stage2
-   container_name: ghostwrite_stage2
-   restart: unless-stopped
-   networks:
-     - ctfd_net
-  # stage3: (added in a later phase)
+    build: ./stage2
+    container_name: ghostwrite_stage2
+    restart: unless-stopped
+    networks:
+      - ctfd_net
 
-  # ===== TRACK B (internal_net) — teammate fills these in =====
-  # jump: 
-  # stage4-5:
-  # c2:
+  # ===== TRACK B (internal_net) =====
+  jump:
+    build: ./jump
+    container_name: ghostwrite_jump
+    restart: unless-stopped
+    ports:
+      - "2222:22"
+    networks:
+      - ctfd_net
+      - internal_net
+
+  stage45:
+    build: ./stage4-5/diag
+    container_name: ghostwrite_stage45
+    restart: unless-stopped
+    networks:
+      internal_net:
+        aliases:
+          - build-internal.nightfall.lan
+  # c2: (added when Stage 5/6 are built)
   # stage6: (uses static pcap file, no container needed)
 
 networks:
@@ -86,7 +103,7 @@ networks:
     driver: bridge
   internal_net:
     driver: bridge
-    internal: true   # no route to real internet, matches report's isolation requirement
+    internal: true
 
 volumes:
   ctfd_db_data:
