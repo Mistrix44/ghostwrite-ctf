@@ -19,7 +19,7 @@ body{background:var(--bg);color:var(--tx);font:15px/1.6 ui-monospace,Menlo,Conso
 h1{color:var(--cy);font-size:1.3rem;margin-bottom:8px}
 p.sub{color:var(--mu);font-size:.88rem;margin-bottom:24px}
 label{display:block;font-size:.8rem;color:var(--mu);margin-bottom:4px}
-input{width:100%;background:#000;border:1px solid #23264a;color:var(--tx);padding:10px 12px;border-radius:6px;margin-bottom:16px;font-family:inherit}
+input{width:100%;background:#000;border:1px solid #23264a;color:var(--tx);padding:10px 12px;border-radius:6px;margin-bottom:16px;font-family:inherit;letter-spacing:2px}
 button{width:100%;background:var(--cy);color:#000;font-weight:700;border:none;padding:12px;border-radius:6px;cursor:pointer}
 button:hover{opacity:.85}
 #result{margin-top:20px;padding:14px;border-radius:6px;display:none;font-size:.85rem}
@@ -31,16 +31,10 @@ code{display:block;background:#000;padding:10px;border-radius:6px;margin-top:8px
 <body>
 <div class="card">
   <h1>IOC CORRELATOR</h1>
-  <p class="sub">Nightfall SOC will not confirm an incident chain without correlating indicators recovered from all four evidence sources. Submit the four sync tokens in order.</p>
+  <p class="sub">Nightfall SOC will not confirm an incident chain without correlating indicators recovered from all four evidence sources. Four sync tokens are recoverable from the evidence bundle - their source order is not recorded here.</p>
   <form id="f">
-    <label>Fragment 1 (file_activity)</label>
-    <input id="f1" maxlength="4" autocomplete="off">
-    <label>Fragment 2 (timeline)</label>
-    <input id="f2" maxlength="4" autocomplete="off">
-    <label>Fragment 3 (process_log)</label>
-    <input id="f3" maxlength="4" autocomplete="off">
-    <label>Fragment 4 (powershell_history)</label>
-    <input id="f4" maxlength="4" autocomplete="off">
+    <label>16-character incident key (4 tokens, concatenated)</label>
+    <input id="key" maxlength="16" autocomplete="off" placeholder="XXXXXXXXXXXXXXXX">
     <button type="submit">Correlate</button>
   </form>
   <div id="result"></div>
@@ -48,7 +42,7 @@ code{display:block;background:#000;padding:10px;border-radius:6px;margin-top:8px
 <script>
 document.getElementById('f').addEventListener('submit', async function(e){
   e.preventDefault();
-  const guess = ['f1','f2','f3','f4'].map(id => document.getElementById(id).value.trim().toUpperCase()).join('');
+  const guess = document.getElementById('key').value.trim().toUpperCase();
   const r = await fetch('/api/correlate', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
