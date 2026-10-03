@@ -68,6 +68,12 @@ services:
     networks:
       - ctfd_net
   # stage3: (uses static files served via stage1's /files/ path, no separate container needed)
+  stage3verify:
+    build: ./stage3-verify
+    container_name: ghostwrite_stage3verify
+    restart: unless-stopped
+    networks:
+      - ctfd_net
 
   stage2:
     build: ./stage2
