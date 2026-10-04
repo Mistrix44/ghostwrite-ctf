@@ -31,9 +31,9 @@ try {
         -Headers @{ "X-Agent-Key" = $agentKey } `
         -TimeoutSec $TimeoutSec -UseBasicParsing
 
-    Write-SyncLog "checkin status: $(.StatusCode)"
+    Write-SyncLog "checkin status: $($resp.StatusCode)"
 } catch {
-    Write-SyncLog "checkin failed: $(.Exception.Message)"
+    Write-SyncLog "checkin failed: $($_.Exception.Message)"
 }
 
 Write-SyncLog "build sync complete"
