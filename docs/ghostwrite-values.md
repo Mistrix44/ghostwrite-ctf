@@ -14,8 +14,8 @@ Flags:
   S2 GHOSTWRITE{n0t_4_r34l_c4ptch4_e51f28}
   S3 GHOSTWRITE{pwsh_upd4te_dr0pp3d_tmp_b04d6e}
   S4 GHOSTWRITE{4g3nt_ch3ck1n_4cc3pt3d_8c27fa}
-  S5 GHOSTWRITE{p3rs1st3nc3_v14_gh0st_sync_31e9a4}
-  S6 GHOSTWRITE{c2_h0p_c0nf1rm3d_n1ghtf4ll_6d5b70}
+  S5 GHOSTWRITE{gh0st_sync_s3rv1c3_f0und}
+  S6 GHOSTWRITE{full_ch41n_c0nf1rm3d_bca2cc}
 
 NOTE: Report specifies Ubuntu 22.04 LTS. Actual build environment is Ubuntu 26.04 LTS.
 Reason: version available at build time. No architectural impact — same Docker/systemd approach.
