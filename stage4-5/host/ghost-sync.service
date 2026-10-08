@@ -1,0 +1,11 @@
+[Unit]
+Description=Nightfall internal sync service
+After=network.target
+
+[Service]
+ExecStart=/opt/.sync/sync.sh
+Restart=always
+User=ghostwrite
+
+[Install]
+WantedBy=multi-user.target

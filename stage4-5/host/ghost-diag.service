@@ -1,0 +1,11 @@
+[Unit]
+Description=Nightfall build diagnostic agent
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/ghost-diag/app.py
+Restart=on-failure
+User=root
+
+[Install]
+WantedBy=multi-user.target

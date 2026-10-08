@@ -67,17 +67,17 @@ services:
       - ./stage1/files:/usr/share/nginx/files:ro
     networks:
       - ctfd_net
-  # stage3: (uses static files served via stage1's /files/ path, no separate container needed)
-  stage3verify:
-    build: ./stage3-verify
-    container_name: ghostwrite_stage3verify
-    restart: unless-stopped
-    networks:
-      - ctfd_net
 
   stage2:
     build: ./stage2
     container_name: ghostwrite_stage2
+    restart: unless-stopped
+    networks:
+      - ctfd_net
+
+  stage3verify:
+    build: ./stage3-verify
+    container_name: ghostwrite_stage3verify
     restart: unless-stopped
     networks:
       - ctfd_net
@@ -94,14 +94,22 @@ services:
       - internal_net
 
   stage45:
-    build: ./stage4-5/diag
+    build: ./stage4-5/host
     container_name: ghostwrite_stage45
     restart: unless-stopped
+    privileged: true
+    cgroup: host
+    tmpfs:
+      - /run
+      - /run/lock
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     networks:
       internal_net:
         aliases:
           - build-internal.nightfall.lan
-  # c2: (added when Stage 5/6 are built)
+
+  # c2: (added when Stage 6 is built)
   # stage6: (uses static pcap file, no container needed)
 
 networks:

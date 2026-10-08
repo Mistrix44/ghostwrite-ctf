@@ -1,0 +1,11 @@
+[Unit]
+Description=Nightly backup synchronization
+After=network.target
+
+[Service]
+ExecStart=/bin/sleep infinity
+Restart=always
+User=svc-backup
+
+[Install]
+WantedBy=multi-user.target
