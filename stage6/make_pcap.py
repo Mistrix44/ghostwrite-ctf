@@ -187,14 +187,30 @@ def hop1():
 
 
 def hop2():
-    """Build host -> simulated C2, TCP/4444 (matches Stage 5). Flag is Base64 here."""
-    payload = base64.b64encode(FLAG.encode())
+    """Build host -> simulated C2, TCP/4444 (matches Stage 5). Flag is chunked Base64."""
+    b64 = base64.b64encode(FLAG.encode()).decode()
+    n = -(-len(b64) // 3)
+    parts = [b64[i:i + n] for i in range(0, len(b64), n)]
+    total = len(parts)
+
+    def chunk(i):
+        return ("CHUNK %d/%d %s\n" % (i + 1, total, parts[i])).encode()
+
+    status = base64.b64encode(b"beacon_nominal")
     tcp_session(BUILD, C2, 41822, 4444, T0 + 182, [
         ("c", b"GW-SYNC/1.0 HELLO\nhost: build-internal.nightfall.lan\n"
               b"campaign: GW-ECLIPSE-07\n"),
         ("s", b"READY\n"),
-        ("c", b"PAYLOAD " + payload + b"\n"),
+        ("c", b"STATUS " + status + b"\n"),
+        ("s", b"ACK 0\n"),
+        ("c", chunk(1)),
+        ("s", b"ACK 2\n"),
+        ("c", chunk(2)),
+        ("s", b"ACK 3\n"),
+        ("c", chunk(0)),
         ("s", b"ACK 1\n"),
+        ("c", b"DONE\n"),
+        ("s", b"BYE\n"),
     ])
 
 
