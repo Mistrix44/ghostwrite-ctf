@@ -43,7 +43,7 @@ code{display:block;background:#000;padding:10px;border-radius:6px;margin-top:8px
 document.getElementById('f').addEventListener('submit', async function(e){
   e.preventDefault();
   const guess = document.getElementById('key').value.trim().toUpperCase();
-  const r = await fetch('/api/correlate', {
+  const r = await fetch('/correlate/api/correlate', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({password: guess})

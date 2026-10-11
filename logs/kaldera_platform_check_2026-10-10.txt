@@ -1,0 +1,20 @@
+Platform check - 2026-10-10T23:26:15
+[PASS] service ctfd running (running)
+[PASS] service ctfd_cache running (running)
+[PASS] service ctfd_db running (running)
+[PASS] service jump running (running)
+[PASS] service proxy running (running)
+[PASS] service stage1 running (running)
+[PASS] service stage2 running (running)
+[PASS] service stage3verify running (running)
+[PASS] service stage45 running (running)
+[PASS] published ports are only [80, 2222, 8000] (found [80, 2222, 8000])
+[PASS] T5 internal_net has internal=true (true)
+[PASS] T5 stage45 cannot reach the internet (BLOCKED)
+[PASS] proxy route / (HTTP 200)
+[PASS] proxy route /verify/ (HTTP 200)
+[PASS] proxy route /correlate/ (HTTP 200)
+[PASS] proxy route /files/incident.pcap (HTTP 200)
+[PASS] direct :8000 does not serve /files/ (HTTP 404)
+
+17/17 checks passed
