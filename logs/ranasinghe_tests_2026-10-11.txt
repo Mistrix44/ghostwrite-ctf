@@ -1,0 +1,14 @@
+[PASS] T3: Valid agent key is accepted (STATUS=200
+REGISTERED=True
+FLAG_PRESENT=True)
+[PASS] T4: Invalid agent key is rejected (STATUS=403
+FLAG_PRESENT=False)
+[PASS] S6-a: PCAP has a valid capture header (119434 bytes)
+[PASS] S6-b: PCAP has no raw plaintext flag marker (Raw-byte check only; inspect streams separately in Wireshark)
+[PASS] T7-a: Stage 45 restart command succeeds (Container ghostwrite_stage45  Restarting
+ Container ghostwrite_stage45  Started)
+[PASS] T7-b: Diagnostic service recovers after restart (ghost-diag.service active)
+[PASS] T7-c: Valid check-in works after recovery (STATUS=200
+REGISTERED=True
+FLAG_PRESENT=True)
+RESULT: 7/7 checks passed
