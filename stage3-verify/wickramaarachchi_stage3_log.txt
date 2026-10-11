@@ -1,0 +1,10 @@
+[*] Extracting real fragments from evidence zip...
+file_activity.csv        real fragment(s): ['EYPO']
+timeline.csv             real fragment(s): ['5JSV']
+process_log.csv          real fragment(s): ['TV7H']
+powershell_history.txt   real fragment(s): ['DO44']
+[*] Total fragments found: 4
+[*] Trying: EYPO5JSVTV7HDO44
+[+] MATCH FOUND after 1 tries!
+[+] Order: EYPO5JSVTV7HDO44
+[+] Flag: GHOSTWRITE{pwsh_upd4te_dr0pp3d_tmp_b04d6e}
