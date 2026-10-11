@@ -193,3 +193,6 @@ Also verify that the required hostnames are present in `/etc/hosts`.
 ## Acknowledgements
 
 Developed as a multi-stage cybersecurity CTF project for hands-on security learning and investigation.
+
+## Contributions
+See [CONTRIBUTIONS.md](CONTRIBUTIONS.md) for who built which part.
